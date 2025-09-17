@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Anniversary ❤️</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Floating photo background -->
+  <div class="background">
+  </div>
+
+  <!-- Panel 1 -->
+  <section class="panel panel-one" id="panel1" data-title="Home">
+    <div class="content">
+      <h1>Happy Anniversary ❤️</h1>
+      <p>This is our special little website.</p>
+    </div>
+    <div class="indicator">
+      <span class="hint">Scroll for more</span>
+      <a href="#panel2" class="arrow">▼</a>
+    </div>
+  </section>
+
+  <!-- Panel 2 (TOC) -->
+  <section class="panel panel-two" id="panel2" data-title="Contents">
+    <div class="content">
+      <h1>Table of Contents</h1>
+      <nav id="toc" class="toc"></nav>
+    </div>
+    <div class="indicator">
+      <span class="hint">Jump to a section</span>
+      <a href="#panel3" class="arrow">▼</a>
+    </div>
+  </section>
+
+  <!-- Panel 3 (Intro) -->
+  <section class="panel panel-three" id="panel3" data-title="Intro">
+    <div class="content">
+      <h1>Intro</h1>
+      <p>Forever and always. 💕</p>
+    </div>
+    <div class="indicator">
+      <span class="hint">Keep going</span>
+      <a href="#panel4" class="arrow">▼</a>
+    </div>
+  </section>
+
+  <!--Panel 4(Snake Game)-->
+  <section class="panel panel-four" id="panel4" data-title="Aarssssssi">    <div class="content">
+      <h1>Photo Snake</h1>
+      <p>Use arrow keys / WASD. Eat the 🍎 pics. Scroll back up anytime.</p>
+
+      <div class="game-wrap">
+        <canvas id="snakeCanvas" width="480" height="480" aria-label="Snake game"></canvas>
+
+        <div class="hud">
+          <div class="scores">
+            <span>Score: <strong id="snakeScore">0</strong></span>
+            <span>Best: <strong id="snakeBest">0</strong></span>
+          </div>
+          <div class="buttons">
+            <button id="snakeStart" type="button">Start</button>
+            <button id="snakePause" type="button">Pause</button>
+            <button id="snakeReset" type="button">Reset</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="indicator">
+      <span class="hint">Back to top</span>
+      <a href="#panel1" class="arrow">▲</a>
+    </div>
+  </section>
+
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,275 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Enable snap scrolling */
+html, body {
+  height: 100%;
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: white;
+
+  scroll-snap-type: y mandatory; /* force snap vertically */
+  scroll-behavior: smooth;       /* smooth scroll on arrow click */
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+/* Each panel is a snap point */
+.panel {
+  height: 100vh;                 /* full viewport height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 0 6px rgba(0,0,0,0.7);
+
+  background-attachment: fixed;  /* parallax effect */
+  background-size: cover;
+  background-position: center;
+  /*test*/
+    background-color: rgba(50, 50, 200, 0.3); /* bluish, lowest */
+
+  scroll-snap-align: start;      /* stop at start of panel */
+}
+
+/* Table of Contents */
+.toc {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.toc a {
+  padding: 10px 16px;
+  min-width: 220px;
+  text-align: center;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  backdrop-filter: blur(2px);
+}
+
+.toc a:hover { background: rgba(255,255,255,0.25); }
+.toc a.active {
+  background: rgba(255,255,255,0.35);
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.45) inset;
+}
+
+
+/* Panel backgrounds */
+.panel-one {
+  background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+  color: #333;
+}
+.panel-two {
+  background: linear-gradient(135deg, #d81b60, #ad1457);
+}
+.panel-three {
+  background: linear-gradient(135deg, #6a1b9a, #4a148c);
+}
+
+/* Content animations */
+.content {
+  position: relative;
+  padding: 20px;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease-out;
+  z-index: 10;
+}
+
+.content.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.panel-two .content {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%); /* keep it centered horizontally */
+  opacity: 1;  
+}
+/* Scroll indicators */
+.indicator {
+  position: absolute;
+  bottom: 20px;
+  text-align: center;
+  z-index: 10;
+}
+
+.hint {
+  display: block;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 5px;
+}
+
+.arrow {
+  display: inline-block;
+  font-size: 2rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  animation: bounce 1.5s infinite;
+
+}
+
+.arrow:hover {
+  color: #fff;
+}
+
+/* Arrow bounce */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(5px); }
+  60% { transform: translateY(3px); }
+}
+
+/* Background wrapper (holds floating images) this is important for some reason*/
+.background {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;  /* so you can still scroll/click panels */
+  z-index: 5; /* above panels */
+  overflow: hidden;
+}
+
+/* Floating images (inside wrappers) */
+.background img {
+  display: block;
+  width: 120px;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+/* Compose transforms via wrappers so animations don't override each other */
+.background .float {
+  position: absolute;
+  bottom: -150px;
+  opacity: 0.8;
+  will-change: transform, opacity;
+}
+
+.background .sway {
+  will-change: transform;
+}
+
+.background .spin {
+  will-change: transform;
+  transform-origin: 50% 50%;
+}
+
+/* Floating animation */
+@keyframes floatUp {
+  from {
+    transform: translateY(100vh) scale(1);
+    opacity: 0;
+  }
+  20% { opacity: 0.8; }
+  80% { opacity: 0.8; }
+  to {
+    transform: translateY(-120vh) scale(1.2);
+    opacity: 0;
+  }
+}
+
+/* New animations used by JS */
+@keyframes sway {
+  from { transform: translateX(-12px); }
+  to   { transform: translateX(12px); }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Panel 4 background ------------------------------------------------*/
+.panel-four {
+  background: linear-gradient(135deg, #283593, #1e88e5);
+}
+
+/* Game layout */
+.game-wrap {
+  margin: 18px auto 0;
+  display: grid;
+  gap: 12px;
+  justify-items: center;
+  position: relative;
+  z-index: 20;
+}
+
+#snakeCanvas {
+  width: 720px;   /* bigger default */
+  height: 720px;
+  background: rgba(0,0,0,0.15);
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+}
+
+.hud {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hud .scores {
+  display: flex;
+  gap: 16px;
+  font-weight: 600;
+}
+
+.hud .buttons button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  cursor: pointer;
+  backdrop-filter: blur(2px);
+}
+.hud .buttons button:hover { background: rgba(255,255,255,0.25); }
+
+
+/* Make indicators stay above flowers and pinned to bottom (as you set) */
+.indicator {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 10;
+}
+
+/* Responsive canvas */
+@media (max-width: 980px) {
+  #snakeCanvas { width: 600px; height: 600px; }
+}
+@media (max-width: 760px) {
+  #snakeCanvas { width: 480px; height: 480px; }
+}
+@media (max-width: 560px) {
+  #snakeCanvas { width: 360px; height: 360px; }
+}
+
+/* Optional: reduce motion support (calmer background/game flashes) */
+@media (prefers-reduced-motion: reduce) {
+  .background .float,
+  .background .sway,
+  .background .spin {
+    animation: none !important;
+  }
+}
+
