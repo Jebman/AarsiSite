@@ -76,6 +76,10 @@ html, body {
 .panel-three {
   background: linear-gradient(135deg, #6a1b9a, #4a148c);
 }
+.panel-five  {
+  background: linear-gradient(135deg, #b4285c, #961c51)
+}
+
 
 /* Content animations */
 .content {
@@ -92,6 +96,16 @@ html, body {
   transform: translateY(0);
 }
 
+.panel-one .content p {
+  max-width: 65ch;
+  margin-top: 8px;
+  font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+  line-height: 1.7;
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+}
+
 .panel-two .content {
   position: absolute;
   top: 40px;
@@ -99,6 +113,82 @@ html, body {
   transform: translateX(-50%); /* keep it centered horizontally */
   opacity: 1;  
 }
+
+.panel-three .content {
+  position: absolute;
+  top: 10vh;
+  left: 0; right: 0;
+  width: min(90vw, 800px);
+  margin: 0 auto;
+  text-align: left;
+}
+
+.panel-three .content h1 {
+  font-size: clamp(2.2rem, 6vw, 3.6rem);
+  line-height: 1.15;
+  margin-bottom: 10px;
+  text-wrap: balance;
+}
+
+.panel-three .content p {
+  max-width: 65ch;
+  margin-top: 8px;
+  font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+  line-height: 1.7;
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+}
+
+/* Panel 5 layout + layering */
+.panel-five .content {
+  position: absolute;      /* keeps your fade-in working */
+  inset: 0;                /* full panel */
+  z-index: 20;             /* above .background (z:5) and panel bg */
+}
+
+/* Title at the top */
+.panel-five .heading {
+  position: absolute;
+  top: 5vh;                /* adjust to taste */
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(92vw, 980px);
+  text-align: center;
+  z-index: 21;
+}
+.panel-five .heading h1 {
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  line-height: 1.1;
+  margin: 0;
+  text-wrap: balance;
+}
+
+/* Paragraph in a lifted card above the background */
+.panel-five .note-card {
+  position: absolute;
+  top: 18vh;               /* sits below the header; tweak as needed */
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(98vw, 1440px);
+  max-width: none;
+  padding: 24px 28px;
+  border-radius: 18px;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  z-index: 21;             /* above flowers */
+}
+.panel-five .note-card p {
+  font-size: clamp(1.15rem, 2.4vw, 1.6rem);  /* bigger text */
+  line-height: 1.85;
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  margin: 0;
+}
+
 /* Scroll indicators */
 .indicator {
   position: absolute;
